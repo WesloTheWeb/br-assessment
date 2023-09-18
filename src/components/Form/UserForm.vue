@@ -24,17 +24,19 @@
           </option>
         </select>
         <!-- textbox -->
-        <textarea v-else-if="field.type === 'textarea'" :name="field.id" v-model="field.value"></textarea>
+        <textarea v-else-if="field.type === 'textarea'" :name="field.id" v-model="field.value"
+          :maxlength="500"></textarea>
+        <div v-if="field.id === 'description'" class="char-count">{{ descriptionCharsLeft }} characters left</div>
       </div>
     </section>
-    <ActionButton type="submit" title="submit" />
+    <ActionButton type="submit" title="submit" :isDisabled="!isFormValid" />
   </form>
 </template>
   
 <script lang="ts">
 import { defineComponent } from 'vue';
 import ActionButton from '../ActionButton/ActionButton.vue';
-import { FieldOption, Field, UserData } from '../../interfaces/FieldInterfaces';
+import { Field, UserData } from '../../interfaces/FieldInterfaces';
 
 export default defineComponent({
   name: 'UserForm',
@@ -117,27 +119,36 @@ export default defineComponent({
     }
   },
   computed: {
-    // Typing of our computed value, need to make sure TS understands string.
     isFullNameValid(this: UserData): boolean {
       const fullNameField = this.fields.find(el => el.id === 'fullName');
-      return (typeof fullNameField?.value === 'string') && fullNameField.value.length >= 3;
+      return (fullNameField?.value && typeof fullNameField.value === 'string' && fullNameField.value.length >= 3) || false;
     },
     isPhoneNumberValid(this: UserData): boolean {
       const phoneNumberField = this.fields.find(el => el.id === 'phoneNumber');
-      return typeof phoneNumberField?.value === 'number' && /^\d+$/.test(phoneNumberField.value.toString());
+      return (phoneNumberField?.value && /^\d+$/.test(phoneNumberField.value.toString())) || false;
     },
-    isInterestValid(this: UserData) {
+    isReferenceSelected(this: UserData): boolean {
+      const referenceField = this.fields.find(el => el.id === 'reference');
+      return (referenceField?.value && Array.isArray(referenceField.value) && referenceField.value.length > 0) || false;
+    },
+    isInterestValid(this: UserData): boolean {
       const interestField = this.fields.find(el => el.id === 'interests');
-      return interestField && interestField.value !== '';
+      return (interestField?.value && interestField.value !== '') || false;
     },
     descriptionCharsLeft(this: UserData): number {
       const descriptionField = this.fields.find(el => el.id === 'description');
-      return (typeof descriptionField?.value === 'string') ? 500 - descriptionField.value.length : 500;
+      return (descriptionField?.value && typeof descriptionField.value === 'string') ? 500 - descriptionField.value.length : 500;
     },
-    isDescriptionValid(this: UserData) {
+    isDescriptionValid(this: UserData): boolean {
       const descriptionField = this.fields.find(el => el.id === 'description');
-      const charsLeft = (typeof descriptionField?.value === 'string') ? 500 - descriptionField.value.length : 500;
-      return charsLeft >= 0;
+      return (descriptionField?.value && typeof descriptionField.value === 'string' && (descriptionField.value as string).length > 0) || false;
+    },
+    isFormValid(this: UserData): boolean {
+      return (this as any).isFullNameValid &&
+        (this as any).isPhoneNumberValid &&
+        (this as any).isReferenceSelected &&
+        (this as any).isInterestValid &&
+        (this as any).isDescriptionValid;
     }
   }
 });
