@@ -23,14 +23,19 @@
         <textarea v-else-if="field.type === 'textarea'" :name="field.id" v-model="field.value"></textarea>
       </div>
     </section>
+    <ActionButton title="submit" />
   </form>
 </template>
   
 <script lang="ts">
 import { defineComponent } from 'vue';
+import ActionButton from '../ActionButton/ActionButton.vue';
 
 export default defineComponent({
   name: 'UserForm',
+  components: {
+    ActionButton
+  },
   data() {
     return {
       // OPTION API generate fields

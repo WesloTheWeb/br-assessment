@@ -1,0 +1,14 @@
+.disabled {
+    opacity: .7;
+    cursor: not-allowed;  
+}
+
+.buttonProps {
+    font-weight: bold;
+    border: none;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: rgb(54, 144, 223);
+    color: #fff;
+    cursor: pointer;
+}
