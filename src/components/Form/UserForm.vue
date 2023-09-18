@@ -11,18 +11,26 @@
         </div>
 
         <!-- references -->
-        <div v-else-if="field.type === 'checkbox'" class="reference-group">
+        <div v-else-if="field.type === 'checkbox'" class="reference-group" @blur="handleBlur(field)">
           <div v-for="option in field.options" :key="option.value">
             <label :for="option.value">{{ option.label }}</label>
-            <input type="checkbox" :id="option.value" :value="option.value" v-model="field.value" />
+            <input type="checkbox" :id="option.value" :value="option.value" v-model="field.value" @blur="handleBlur(field)" />
           </div>
         </div>
+        <div class="error-message" v-if="field.id === 'reference' && !isReferenceSelected && field.touched">
+          At least one reference must be selected.
+        </div>
+
         <!-- interest select -->
-        <select v-else-if="field.type === 'select'" :name="field.id" v-model="field.value">
+        <select v-else-if="field.type === 'select'" :name="field.id" v-model="field.value" @blur="handleBlur(field)">
           <option v-for="option in field.options" :key="option.value" :value="option.value">
             {{ option.label }}
           </option>
         </select>
+        <div class="error-message" v-if="field.id === 'interests' && !isInterestValid && field.touched">
+          Please select an interest.
+        </div>
+
         <!-- textbox -->
         <textarea v-else-if="field.type === 'textarea'" :name="field.id" v-model="field.value"
           :maxlength="500"></textarea>
