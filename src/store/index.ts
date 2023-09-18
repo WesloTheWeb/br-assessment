@@ -4,7 +4,7 @@ export type StateType = {
   userInput: {
     fullName: string;
     phoneNumber: string;
-    gender: string;
+    interest: string;
     reference: string[];
     description: string;
   };
@@ -15,7 +15,7 @@ export default createStore({
     userInput: {
       fullName: '',
       phoneNumber: '',
-      gender: '',
+      interest: '',
       reference: [],
       description: '',
     }

@@ -12,7 +12,7 @@
       </div>
 
       <div>
-        <strong>Gender:</strong> {{ userInput.gender }}
+        <strong>Interests:</strong> {{ userInput.interests }}
       </div>
 
       <div>

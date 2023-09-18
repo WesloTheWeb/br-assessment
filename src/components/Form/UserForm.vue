@@ -17,7 +17,7 @@
             <input type="checkbox" :id="option.value" :value="option.value" v-model="field.value" />
           </div>
         </div>
-        <!-- gender select -->
+        <!-- interest select -->
         <select v-else-if="field.type === 'select'" :name="field.id" v-model="field.value">
           <option v-for="option in field.options" :key="option.value" :value="option.value">
             {{ option.label }}
@@ -71,14 +71,25 @@ export default defineComponent({
           ]
         },
         {
-          id: 'gender',
-          label: 'Gender',
+          id: 'interests',
+          label: 'Interests',
           type: 'select',
-          value: 'Male',
+          value: '',
           options: [
-            { label: 'Male', value: 'Male' },
-            { label: 'Female', value: 'Female' },
-            { label: 'Other', value: 'Other' },
+            { label: 'Snowboarding', value: 'Snowboarding' },
+            { label: 'Coding', value: 'Coding' },
+            { label: 'Reading', value: 'Reading' },
+            { label: 'Music', value: 'Music' },
+            { label: 'Hiking', value: 'Hiking' },
+            { label: 'Traveling', value: 'Traveling' },
+            { label: 'Photography', value: 'Photography' },
+            { label: 'Painting', value: 'Painting' },
+            { label: 'Gaming', value: 'Gaming' },
+            { label: 'Cooking', value: 'Cooking' },
+            { label: 'Cycling', value: 'Cycling' },
+            { label: 'Running', value: 'Running' },
+            { label: 'Swimming', value: 'Swimming' },
+            { label: 'Other', value: 'Other' }
           ]
         },
         {
@@ -115,9 +126,9 @@ export default defineComponent({
       const phoneNumberField = this.fields.find(el => el.id === 'phoneNumber');
       return typeof phoneNumberField?.value === 'number' && /^\d+$/.test(phoneNumberField.value.toString());
     },
-    isGenderValid(this: UserData) {
-      const genderField = this.fields.find(el => el.id === 'gender');
-      return genderField && genderField.value !== '';
+    isInterestValid(this: UserData) {
+      const interestField = this.fields.find(el => el.id === 'interests');
+      return interestField && interestField.value !== '';
     },
     descriptionCharsLeft(this: UserData): number {
       const descriptionField = this.fields.find(el => el.id === 'description');
