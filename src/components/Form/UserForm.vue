@@ -95,13 +95,14 @@ export default defineComponent({
       field.touched = true;
     },
     submitForm() {
-        const formData: { [key: string]: any } = {};
-        this.fields.forEach(field => {
-            formData[field.id] = field.value;
-        });
-        this.$store.dispatch('updateUserInput', formData);
-    }
+      const formData: { [key: string]: any } = {};
+      this.fields.forEach(field => {
+        formData[field.id] = field.value;
+      });
+      this.$store.dispatch('updateUserInput', formData);
 
+      this.$emit('formSubmitted');
+    }
   },
   computed: {
     // Typing of our computed value, need to make sure TS understands string.
