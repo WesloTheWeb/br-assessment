@@ -1,8 +1,7 @@
 <template>
   <h1>BR Intake Form</h1>
-  <UserForm />
+  <UserForm @formSubmitted="handleFormSubmit" />
   <ModalResults v-if="showModal" />
-
 </template>
 
 <script lang="ts">

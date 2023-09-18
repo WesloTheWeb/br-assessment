@@ -1,5 +1,5 @@
 <template>
-  <form class="user-form">
+  <form class="user-form" @submit.prevent="submitForm">
     <section>
       <div v-for="field in fields" :key="field.id">
         <!-- Name and number -->
@@ -27,7 +27,7 @@
         <textarea v-else-if="field.type === 'textarea'" :name="field.id" v-model="field.value"></textarea>
       </div>
     </section>
-    <ActionButton @click="submitForm" title="submit" />
+    <ActionButton type="submit" title="submit" />
   </form>
 </template>
   
@@ -95,6 +95,7 @@ export default defineComponent({
       field.touched = true;
     },
     submitForm() {
+      console.log('Did I get clicked?')
       const formData: { [key: string]: any } = {};
       this.fields.forEach(field => {
         formData[field.id] = field.value;
