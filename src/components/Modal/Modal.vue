@@ -25,24 +25,29 @@
         <strong>Description:</strong> {{ userInput.description }}
       </div>
     </div>
-
+    <ActionButton title="Close" @click="closeModal" />
   </div>
 </template>
   
-
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
+import ActionButton from '../ActionButton/ActionButton.vue';
 
 export default defineComponent({
   name: 'ModalResults',
   setup() {
     const store = useStore();
     const userInput = computed(() => store.getters.getUserInput);
-
     return {
       userInput
     };
+  },
+  components: { ActionButton },
+  methods: {
+    closeModal() {
+      this.$emit('closeModal');
+    }
   }
 });
 </script>

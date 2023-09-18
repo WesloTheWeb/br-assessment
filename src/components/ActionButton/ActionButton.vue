@@ -16,7 +16,8 @@ export default defineComponent({
         },
         isDisabled: {
             type: Boolean,
-            required: true
+            required: false,
+            default: false
         }
     }
 });

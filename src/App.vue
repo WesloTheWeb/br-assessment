@@ -1,7 +1,7 @@
 <template>
   <h1>BR Intake Form</h1>
   <UserForm @formSubmitted="handleFormSubmit" />
-  <ModalResults v-if="showModal" />
+  <ModalResults v-if="showModal" @closeModal="closeModalHandler" />
 </template>
 
 <script lang="ts">
@@ -26,6 +26,11 @@ export default defineComponent({
       showModal,
       handleFormSubmit
     };
+  },
+  methods: {
+    closeModalHandler() {
+      this.showModal = false;
+    }
   }
 });
 </script>
