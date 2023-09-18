@@ -1,0 +1,16 @@
+.user-form {
+    label {
+        display: block;
+    }
+
+    input {
+        width: 100%;
+        max-width: 80%;
+        padding: .5rem 1rem;
+    }
+
+    section {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

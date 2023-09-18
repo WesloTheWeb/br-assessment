@@ -1,6 +1,11 @@
 <template>
-  <form>
-
+  <form class="user-form">
+    <section>
+      <div v-for="field in fields" :key="field.id">
+        <label :for="field.id">{{ field.label }}</label>
+        <input v-if="field.type === 'text' || field.type === 'number'" :type="field.type" :name="field.id" v-model="field.value" />
+      </div>
+    </section>
   </form>
 </template>
   
