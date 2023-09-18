@@ -14,3 +14,12 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+.reference-group {
+
+    label {
+        display: inline-block;
+    }
+
+    display: flex;
+}

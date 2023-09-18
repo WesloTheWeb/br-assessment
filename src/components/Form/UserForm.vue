@@ -3,8 +3,16 @@
     <section>
       <div v-for="field in fields" :key="field.id">
         <label :for="field.id">{{ field.label }}</label>
-        <input v-if="field.type === 'text' || field.type === 'number'" :type="field.type" :name="field.id" v-model="field.value" />
+        <input v-if="field.type === 'text' || field.type === 'number'" :type="field.type" :name="field.id"
+          v-model="field.value" />
+        <div v-else-if="field.type === 'checkbox'" class="reference-group">
+          <div v-for="option in field.options" :key="option.value">
+            <label :for="option.value">{{ option.label }}</label>
+            <input type="checkbox" :id="option.value" :value="option.value" v-model="field.value" />
+          </div>
+        </div>
       </div>
+
     </section>
   </form>
 </template>
