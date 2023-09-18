@@ -2,17 +2,26 @@
   <form class="user-form">
     <section>
       <div v-for="field in fields" :key="field.id">
+        <!-- Name and number -->
         <label :for="field.id">{{ field.label }}</label>
         <input v-if="field.type === 'text' || field.type === 'number'" :type="field.type" :name="field.id"
           v-model="field.value" />
+        <!-- references -->
         <div v-else-if="field.type === 'checkbox'" class="reference-group">
           <div v-for="option in field.options" :key="option.value">
             <label :for="option.value">{{ option.label }}</label>
             <input type="checkbox" :id="option.value" :value="option.value" v-model="field.value" />
           </div>
         </div>
+        <!-- gender select -->
+        <select v-else-if="field.type === 'select'" :name="field.id" v-model="field.value">
+          <option v-for="option in field.options" :key="option.value" :value="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+        <!-- textbox -->
+        <textarea v-else-if="field.type === 'textarea'" :name="field.id" v-model="field.value"></textarea>
       </div>
-
     </section>
   </form>
 </template>
