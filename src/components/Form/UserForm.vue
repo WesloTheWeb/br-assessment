@@ -27,7 +27,7 @@
         <textarea v-else-if="field.type === 'textarea'" :name="field.id" v-model="field.value"></textarea>
       </div>
     </section>
-    <ActionButton title="submit" />
+    <ActionButton @click="submitForm" title="submit" />
   </form>
 </template>
   
@@ -93,7 +93,15 @@ export default defineComponent({
   methods: {
     handleBlur(field: Field) {
       field.touched = true;
+    },
+    submitForm() {
+        const formData: { [key: string]: any } = {};
+        this.fields.forEach(field => {
+            formData[field.id] = field.value;
+        });
+        this.$store.dispatch('updateUserInput', formData);
     }
+
   },
   computed: {
     // Typing of our computed value, need to make sure TS understands string.
