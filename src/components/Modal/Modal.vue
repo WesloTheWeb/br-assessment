@@ -25,7 +25,9 @@
         <strong>Description:</strong> {{ userInput.description }}
       </div>
     </div>
-    <ActionButton title="Close" @click="closeModal" />
+    <div class="modal-actions">
+      <ActionButton title="Close" @click="closeModal" />
+    </div>
   </div>
 </template>
   

@@ -9,12 +9,16 @@
         <div class="error-message" v-if="field.id === 'fullName' && !isFullNameValid && field.touched">
           Full name should be at least 3 characters long.
         </div>
-
+        <div class="error-message" v-if="field.id === 'phoneNumber' && !isPhoneNumberValid && field.touched">
+          Please enter a valid phone number.
+        </div>
+        
         <!-- references -->
         <div v-else-if="field.type === 'checkbox'" class="reference-group" @blur="handleBlur(field)">
           <div v-for="option in field.options" :key="option.value">
             <label :for="option.value">{{ option.label }}</label>
-            <input type="checkbox" :id="option.value" :value="option.value" v-model="field.value" @blur="handleBlur(field)" />
+            <input type="checkbox" :id="option.value" :value="option.value" v-model="field.value"
+              @blur="handleBlur(field)" />
           </div>
         </div>
         <div class="error-message" v-if="field.id === 'reference' && !isReferenceSelected && field.touched">
@@ -66,7 +70,8 @@ export default defineComponent({
           id: 'phoneNumber',
           label: 'Phone Number',
           type: 'number',
-          value: 0
+          value: '',
+          touched: false
         },
         {
           id: 'reference',
